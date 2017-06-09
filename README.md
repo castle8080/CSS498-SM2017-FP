@@ -32,11 +32,8 @@ The Haskell programming language is of interest for a few reasons. The language 
 ## How will you demonstrate what you learned from your readings? Include a draft plan/schedule.
 
 | Start Date | End Date | Description |
-|--------|--------|
+|--------|--------|--------|
 | June 19th | July 7th | Reading: Chapters 1-6 of “Programming in Haskell” and “Can Programming Be Liberated from the von Neumann Style?” Work: Selected programming exercises from “Programming Haskell” and Survey of current functional languages. |
 | July 8th | July 17th | Reading: Chapter 7 of “Programming in Haskell” and Chapters 1 and 2 of “Purely Functional Data Structures”. Work: Selected programming exercises from the two books and Report on current applications using functional programming concepts |
 | July 18th | July 30th | Reading: Chapters 3 and 4 of “Purely Functional Data Structures” and “Ideal Hash Trees”. Work: Selected programming exercises and Report comparing use of functional data structures to traditional data structures. |
 | Aug 1st | Aug. 18th | Reading: Chapter 12 and 14 from “Programming in Haskell” and “Tackling the Awkward Squad”. Work: Implement a basic chat server, summarize and draw conclusions, and produce Final report. |
-
-
-
