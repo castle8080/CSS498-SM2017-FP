@@ -4,6 +4,5 @@
   dev environment setup.
 -}
 
-main :: IO()
 main =
     putStrLn "Hello"
