@@ -2,9 +2,15 @@
 
 This project contains excersises and there answers for the first study section on functional programming.
 
-# chapter1.hs
+# Files
 
-This file contains the exercises from Chapter 1 of "Programming in Haskell".
+## src/chapter1.hs
+
+This file contains the exercises from Chapter 1 (Introduction) of "Programming in Haskell".
+
+## src/chapter2.hs
+
+This file contains the exercises from Chapter 2 (First steps) of "Programming in Haskell".
 
 # Building and Running
 
