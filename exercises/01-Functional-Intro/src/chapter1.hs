@@ -104,6 +104,7 @@ badqsort (x:xs) =
 test5 = (badqsort [2,2,3,1,1]) == [1,2,3]
 
 main = do
+  putStrLn "Running chapter1 tests:"
   putStrLn $ "Test3: " ++ (show test3)
   putStrLn $ "Test4: " ++ (show test4)
   putStrLn $ "Test5: " ++ (show test5)
