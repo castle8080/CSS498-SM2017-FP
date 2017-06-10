@@ -16,6 +16,10 @@ This file contains the exercises from Chapter 2 (First steps) of "Programming in
 
 This file contains the exercises from Chapter 3 (Types and classes) of "Programming in Haskell".
 
+## src/chapter4.hs
+
+This file contains the exercises from Chapter 3 (Types and classes) of "Defining functions".
+
 # Building and Running
 
 In order to build and run the code ghc must be installed.
