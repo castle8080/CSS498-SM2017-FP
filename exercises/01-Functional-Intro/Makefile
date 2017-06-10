@@ -1,13 +1,16 @@
 
 all: compile
 
-chapter1.exe: chapter1.hs
-	ghc *.hs -o chapter1.exe
+bin/chapter1.exe: src/chapter1.hs
+	ghc src/chapter1.hs -o bin/chapter1.exe
 
-compile: chapter1.exe
+compile: init bin/chapter1.exe
+
+init:
+	@if [ ! -d bin ]; then mkdir bin; fi
 
 clean:
-	rm -rf *.o *.hi *~ *.exe
+	rm -rf src/*.o src/*.hi src/*~ bin
 
 run: compile
-	./chapter1.exe
+	bin/chapter1.exe
