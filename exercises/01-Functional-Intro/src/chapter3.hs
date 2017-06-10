@@ -4,6 +4,9 @@
 -}
 import Data.List
 
+-- Utility function for checking all items in a list are true.
+all_true xs = all id xs
+
 {-
   1. What are the types of the following values?
     ['a','b','c']
@@ -61,7 +64,7 @@ apply f arg = (f arg)
 
 -- Test the functions
 test2 =
-  all id [
+  all_true [
     add 1 2 == 3,
     copy "bob" == ("bob", "bob"),
     copy 42 == (42, 42),

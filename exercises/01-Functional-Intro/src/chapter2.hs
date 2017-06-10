@@ -4,6 +4,9 @@
 -}
 import Data.List
 
+-- Utility function for checking all items in a list are true.
+all_true xs = all id xs
+
  {-
   2. Parenthesise the following numeric expressions:
     2^3*4
@@ -12,7 +15,7 @@ import Data.List
  -}
 
 test2 =
-  all id [
+  all_true [
     2^3*4   == (2^3)*4,
     2*3+4*5 == ((2*3)+(4*5)),
     2+3*4^5 == 2+(3*(4^5))
@@ -58,7 +61,7 @@ my_last2 (x:[]) = x
 my_last2 (x:xs) = my_last2 xs
 
 test4 =
-  all id [
+  all_true [
     my_last1 [1] == 1,
     my_last1 [1,3,2] == 2,
     my_last2 [1] == 1,
@@ -78,7 +81,7 @@ my_init2 ([x]) = []
 my_init2 (x:xs) = x : my_init2 xs
 
 test5 =
-  all id [
+  all_true [
     my_init1 [1] == [],
     my_init1 [1,3,2] == [1,3],
     my_init2 [1] == [],
