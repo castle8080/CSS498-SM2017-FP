@@ -1,6 +1,6 @@
 {-
   Name: Bryan Castillo
-  Exercises: Chapter 2 "Programming in Haskell"
+  Exercises: Chapter 2 (First steps) "Programming in Haskell"
 -}
 import Data.List
 

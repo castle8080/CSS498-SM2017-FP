@@ -12,6 +12,10 @@ This file contains the exercises from Chapter 1 (Introduction) of "Programming i
 
 This file contains the exercises from Chapter 2 (First steps) of "Programming in Haskell".
 
+## src/chapter3.hs
+
+This file contains the exercises from Chapter 3 (Types and classes) of "Programming in Haskell".
+
 # Building and Running
 
 In order to build and run the code ghc must be installed.
@@ -27,5 +31,3 @@ Requires installation of make
 
 * To build: make
 * To run: make run
-
-

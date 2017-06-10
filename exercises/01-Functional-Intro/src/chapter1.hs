@@ -1,6 +1,6 @@
 {-
   Name: Bryan Castillo
-  Exercises: Chapter 1 "Programming in Haskell"
+  Exercises: Chapter 1 (Introduction) "Programming in Haskell"
 -}
 
 {-

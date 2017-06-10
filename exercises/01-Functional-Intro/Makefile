@@ -7,7 +7,10 @@ bin/chapter1.exe: src/chapter1.hs
 bin/chapter2.exe: src/chapter2.hs
 	ghc src/chapter2.hs -o bin/chapter2.exe
 
-compile: init bin/chapter1.exe bin/chapter2.exe
+bin/chapter3.exe: src/chapter3.hs
+	ghc src/chapter3.hs -o bin/chapter3.exe
+
+compile: init bin/chapter1.exe bin/chapter2.exe bin/chapter3.exe
 
 init:
 	@if [ ! -d bin ]; then mkdir bin; fi
@@ -18,3 +21,4 @@ clean:
 run: compile
 	bin/chapter1.exe
 	bin/chapter2.exe
+	bin/chapter3.exe

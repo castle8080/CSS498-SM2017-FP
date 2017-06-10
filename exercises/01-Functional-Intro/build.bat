@@ -14,12 +14,14 @@ goto end
 if not exist bin md bin
 ghc src\chapter1.hs -o bin\chapter1.exe
 ghc src\chapter2.hs -o bin\chapter2.exe
+ghc src\chapter3.hs -o bin\chapter3.exe
 goto end
 
 :run
 call .\build.bat compile
 .\bin\chapter1.exe
 .\bin\chapter2.exe
+.\bin\chapter3.exe
 goto end
 
 :end
