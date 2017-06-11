@@ -18,7 +18,11 @@ This file contains the exercises from Chapter 3 (Types and classes) of "Programm
 
 ## src/chapter4.hs
 
-This file contains the exercises from Chapter 3 (Types and classes) of "Defining functions".
+This file contains the exercises from Chapter 4 (Defining functions) of "Programming in Haskell".
+
+## src/chapter5.hs
+
+This file contains the exercises from Chapter 5 (List comprehensions) of "Programming in Haskell".
 
 # Building and Running
 
