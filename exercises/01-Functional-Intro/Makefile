@@ -16,7 +16,10 @@ bin/chapter4.exe: src/chapter4.hs
 bin/chapter5.exe: src/chapter5.hs
   ghc src/chapter5.hs -o bin/chapter5.exe
 
-compile: init bin/chapter1.exe bin/chapter2.exe bin/chapter3.exe bin/chapter4.exe bin/chapter5.exe
+bin/chapter6.exe: src/chapter6.hs
+	ghc src/chapter6.hs -o bin/chapter6.exe
+
+compile: init bin/chapter1.exe bin/chapter2.exe bin/chapter3.exe bin/chapter4.exe bin/chapter5.exe bin/chapter6.exe
 
 init:
 	@if [ ! -d bin ]; then mkdir bin; fi
@@ -30,3 +33,4 @@ run: compile
 	bin/chapter3.exe
 	bin/chapter4.exe
 	bin/chapter5.exe
+	bin/chapter6.exe
