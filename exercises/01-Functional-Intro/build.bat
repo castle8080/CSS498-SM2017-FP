@@ -24,6 +24,8 @@ ghc src\chapter5.hs -o bin\chapter5.exe
 if %errorlevel% neq 0 goto :error
 ghc src\chapter6.hs -o bin\chapter6.exe
 if %errorlevel% neq 0 goto :error
+ghc src\chapter7.hs -o bin\chapter7.exe
+if %errorlevel% neq 0 goto :error
 goto end
 
 :run
@@ -35,6 +37,7 @@ if %errorlevel% neq 0 goto :error
 .\bin\chapter4.exe
 .\bin\chapter5.exe
 .\bin\chapter6.exe
+.\bin\chapter7.exe
 goto end
 
 :error

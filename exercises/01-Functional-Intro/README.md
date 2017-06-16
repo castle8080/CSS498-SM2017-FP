@@ -28,6 +28,11 @@ This file contains the exercises from Chapter 5 (List comprehensions) of "Progra
 
 This file contains the exercises from Chapter 6 (Recursive functions) of "Programming in Haskell".
 
+## src/chapter7.hs
+
+This file contains the exercises from Chapter 7 (Higher-order functions) of "Programming in Haskell".
+
+
 # Building and Running
 
 In order to build and run the code ghc must be installed.
