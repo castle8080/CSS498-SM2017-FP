@@ -32,6 +32,10 @@ This file contains the exercises from Chapter 6 (Recursive functions) of "Progra
 
 This file contains the exercises from Chapter 7 (Higher-order functions) of "Programming in Haskell".
 
+## src/chapter8.hs
+
+This file contains the exercises from Chapter 8 (Declaring types and classes) of "Programming in Haskell".
+
 
 # Building and Running
 

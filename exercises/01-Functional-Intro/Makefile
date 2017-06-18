@@ -22,7 +22,10 @@ bin/chapter6.exe: src/chapter6.hs
 bin/chapter7.exe: src/chapter7.hs
 	ghc src/chapter7.hs -o bin/chapter7.exe
 
-compile: init bin/chapter1.exe bin/chapter2.exe bin/chapter3.exe bin/chapter4.exe bin/chapter5.exe bin/chapter6.exe bin/chapter7.exe
+bin/chapter8.exe: src/chapter8.hs
+	ghc src/chapter8.hs -o bin/chapter8.exe
+
+compile: init bin/chapter1.exe bin/chapter2.exe bin/chapter3.exe bin/chapter4.exe bin/chapter5.exe bin/chapter6.exe bin/chapter7.exe bin/chapter8.exe
 
 init:
 	@if [ ! -d bin ]; then mkdir bin; fi
@@ -38,3 +41,4 @@ run: compile
 	bin/chapter5.exe
 	bin/chapter6.exe
 	bin/chapter7.exe
+	bin/chapter8.exe
