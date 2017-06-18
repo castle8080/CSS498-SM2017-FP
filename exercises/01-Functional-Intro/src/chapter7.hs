@@ -3,6 +3,9 @@
   Exercises: Chapter 7 (Higher-order functions) "Programming in Haskell"
 -}
 import Data.List (all)
+import Data.Char
+import Control.Exception
+
 all_true xs = all id xs
 
 {-
@@ -164,6 +167,133 @@ test6 =
     (take 4 $ my_iterate (*2) 1) == [2,4,8,16]
   ]
 
+{-
+  7. Modify the binary string transmitter example to detect simple transmission
+     errors using the concept of parity bits. That is, each eight-bit binary
+     number produced during encoding is extended with a parity bit, set to one
+     if the number contains an odd number of ones, and to zero otherwise. In
+     turn, each resulting nine-bit binary number consumed during decoding is
+     checked to ensure that its parity bit is correct, with the parity Bit
+     being discarded if this is the case, and a parity error being
+     reported otherwise.
+
+     Hint: the library function error :: String -> a displays the given string
+     as an error message and terminates the program; the polymorphic result
+     type ensures that error can be used in any context.
+
+     Answer:
+
+     The code below was modified from the book.
+
+     The sample ghci session below shows a parity bit that is invalid.
+
+      *Main> let x = encode "hi"
+      *Main> x
+      [0,0,0,1,0,1,1,0,1,1,0,0,1,0,1,1,0,0]
+      *Main> x !! 8
+      1
+      *Main> decode $ take 8 x ++ [0] ++ drop 9 x
+      "*** Exception: Invalid parity bit
+-}
+
+chop :: Int -> [Bit] -> [[Bit]]
+chop n = unfold null (take n) (drop n)
+
+bin2int :: [Bit] -> Int
+bin2int = foldr (\x y -> x + 2*y) 0
+
+int2bin :: Int -> [Bit]
+int2bin 0 = []
+int2bin n = n `mod` 2 : int2bin (n `div` 2)
+
+make8 :: [Bit] -> [Bit]
+make8 bits = take 8 (bits ++ repeat 0)
+
+parity :: [Bit] -> Bit
+parity bits = if sum bits `mod` 2 == 1 then 1 else 0
+
+addParity :: [Bit] -> [Bit]
+addParity bits = bits ++ [parity bits]
+
+decodePacket :: [Bit] -> [Bit]
+decodePacket bits =
+  let
+    dataBits = take 8 bits
+    in
+      if bits !! 8 /= parity dataBits then
+        error "Invalid parity bit"
+      else
+        dataBits
+
+encode :: String -> [Bit]
+encode = concat . map (addParity . make8 . int2bin . ord)
+
+decode :: [Bit] -> String
+decode = map (chr . bin2int . decodePacket) . (chop 9)
+
+channel :: [Bit] -> [Bit]
+channel = id
+
+transmit :: String -> String
+transmit = decode . channel . encode
+
+test7 =
+  all_true [
+    transmit "is this easy" == "is this easy"
+  ]
+
+{-
+  8. Test your new string transmitter program from the previous exercise
+     using a faulty communication channel that forgets the first bit, which
+     can be modelled using the tail function on lists of bits.
+-}
+
+badChannel :: [Bit] -> [Bit]
+badChannel = tail
+
+badTransmit :: String -> String
+badTransmit = decode . badChannel . encode
+
+-- I can not figure out how to catch error in Haskell yet.
+-- *Main> badTransmit "hi"
+-- "*** Exception: Invalid parity bit
+
+{-
+  9. Define a function altMap :: (a -> b) -> (a -> b) -> [a] -> [b] that
+    alternately applits its two argument functions to successive elements
+    in a list, in turn about order. For example:
+
+    > altMap (+10) (+100) [0,1,2,3,4]
+    [10,101,12,103,14]
+-}
+
+altMap :: (a -> b) -> (a -> b) -> [a] -> [b]
+altMap f1 f2 = zipWith ($) (concat $ repeat [f1,f2])
+
+test9 =
+  all_true [
+    altMap (+10) (+100) [0,1,2,3,4] == [10,101,12,103,14]
+  ]
+
+{-
+  10. Using altMap, define a function luhn :: [Int] -> Bool that implements
+      the Luhn algorithm from the exercises in chapter 4 for bank card numbers
+      of any length. Test your new function using your own bank card.
+-}
+
+luhn digits =
+  isDivisible $ sum $ altMap id luhnDouble (reverse digits)
+    where
+      sub9 n = if n > 9 then n - 9 else n
+      luhnDouble = sub9 . (*2)
+      isDivisible n = n `mod` 10 == 0
+
+test10 =
+  all_true [
+    luhn [1,7,8,4],
+    not $ luhn [1,7,8,3]
+  ]
+
 main :: IO ()
 main = do
   putStrLn "Running chapter 7 tests:"
@@ -173,3 +303,6 @@ main = do
   putStrLn $ "test4: " ++ (show test4)
   putStrLn $ "test5: " ++ (show test5)
   putStrLn $ "test6: " ++ (show test6)
+  putStrLn $ "test7: " ++ (show test7)
+  putStrLn $ "test9: " ++ (show test9)
+  putStrLn $ "test10: " ++ (show test10)
