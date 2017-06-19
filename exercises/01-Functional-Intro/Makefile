@@ -1,29 +1,31 @@
 
 all: compile
 
+GHC_OPTS = -O2
+
 bin/chapter1.exe: src/chapter1.hs
-	ghc src/chapter1.hs -o bin/chapter1.exe
+	ghc src/chapter1.hs $(GHC_OPTS) -o bin/chapter1.exe
 
 bin/chapter2.exe: src/chapter2.hs
-	ghc src/chapter2.hs -o bin/chapter2.exe
+	ghc src/chapter2.hs $(GHC_OPTS) -o bin/chapter2.exe
 
 bin/chapter3.exe: src/chapter3.hs
-	ghc src/chapter3.hs -o bin/chapter3.exe
+	ghc src/chapter3.hs $(GHC_OPTS) -o bin/chapter3.exe
 
 bin/chapter4.exe: src/chapter4.hs
-	ghc src/chapter4.hs -o bin/chapter4.exe
+	ghc src/chapter4.hs $(GHC_OPTS) -o bin/chapter4.exe
 
 bin/chapter5.exe: src/chapter5.hs
-	ghc src/chapter5.hs -o bin/chapter5.exe
+	ghc src/chapter5.hs $(GHC_OPTS) -o bin/chapter5.exe
 
 bin/chapter6.exe: src/chapter6.hs
-	ghc src/chapter6.hs -o bin/chapter6.exe
+	ghc src/chapter6.hs $(GHC_OPTS) -o bin/chapter6.exe
 
 bin/chapter7.exe: src/chapter7.hs
-	ghc src/chapter7.hs -o bin/chapter7.exe
+	ghc src/chapter7.hs $(GHC_OPTS) -o bin/chapter7.exe
 
 bin/chapter8.exe: src/chapter8.hs
-	ghc src/chapter8.hs -o bin/chapter8.exe
+	ghc src/chapter8.hs $(GHC_OPTS) -o bin/chapter8.exe
 
 compile: init bin/chapter1.exe bin/chapter2.exe bin/chapter3.exe bin/chapter4.exe bin/chapter5.exe bin/chapter6.exe bin/chapter7.exe bin/chapter8.exe
 
