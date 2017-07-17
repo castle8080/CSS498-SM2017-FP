@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\snippets\sn-003.rb.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="ruby">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Type { color: #2e8b57; font-weight: bold; }
+.Identifier { color: #008b8b; }
+.PreProc { color: #a020f0; }
+.Constant { color: #ff00ff; }
+.Special { color: #6a5acd; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="PreProc">require</span> <span class="Special">&quot;</span><span class="Constant">thread</span><span class="Special">&quot;</span>
+
+<span class="PreProc">def</span> <span class="Identifier">compute_prime</span>(n)
+    n + <span class="Constant">1</span>
+<span class="PreProc">end</span>
+
+t1 = <span class="Type">Thread</span>.new { compute_prime(<span class="Constant">1000</span>) }
+t2 = <span class="Type">Thread</span>.new { compute_prime(<span class="Constant">2000</span>) }
+
+r1 = t1.join
+r2 = t2.join
+
+puts r1
+puts r2
+
+
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->
