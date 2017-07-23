@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\snippets\sn012.hs.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="haskell">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Statement { color: #a52a2a; font-weight: bold; }
+.PreProc { color: #a020f0; }
+.Constant { color: #ff00ff; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="PreProc">import</span> <span class="PreProc">qualified</span> Data.Map <span class="PreProc">as</span> Map
+
+double x <span class="Statement">=</span> x <span class="Statement">+</span> x
+square x <span class="Statement">=</span> x <span class="Statement">*</span> x
+same x <span class="Statement">=</span> x
+zero x <span class="Statement">=</span> <span class="Constant">0</span>
+
+adjust_salaries salaries day <span class="Statement">=</span>
+  <span class="Statement">let</span> operation <span class="Statement">=</span>
+        <span class="Statement">case</span> day <span class="Statement">of</span>
+          <span class="Constant">&quot;Friday&quot;</span>   <span class="Statement">-&gt;</span> square
+          <span class="Constant">&quot;Monday&quot;</span>   <span class="Statement">-&gt;</span> zero
+          <span class="Constant">&quot;Thursday&quot;</span> <span class="Statement">-&gt;</span> double
+          _          <span class="Statement">-&gt;</span> same
+  <span class="Statement">in</span>
+    [operation salary <span class="Statement">|</span> salary <span class="Statement">&lt;-</span> salaries]
+
+apply_twice operation x <span class="Statement">=</span>
+  operation (operation x)
+
+apply_all [] x <span class="Statement">=</span> x
+apply_all (op<span class="Statement">:</span>ops) x <span class="Statement">=</span> apply_all ops (op x)
+
+operations_by_name <span class="Statement">=</span> Map.fromList
+  [ (<span class="Constant">&quot;square&quot;</span>, square),
+    (<span class="Constant">&quot;double&quot;</span>, double),
+    (<span class="Constant">&quot;zero&quot;</span>, zero) ]
+
+apply_operation name value <span class="Statement">=</span>
+  (Map.findWithDefault same name operations_by_name) value
+
+
+get_operation <span class="Constant">&quot;Friday&quot;</span>   <span class="Statement">=</span> square
+get_operation <span class="Constant">&quot;Monday&quot;</span>   <span class="Statement">=</span> zero
+get_operation <span class="Constant">&quot;Thursday&quot;</span> <span class="Statement">=</span> double
+get_operation _          <span class="Statement">=</span> same
+
+
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

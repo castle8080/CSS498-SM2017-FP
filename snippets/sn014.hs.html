@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\snippets\sn014.hs.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="haskell">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Statement { color: #a52a2a; font-weight: bold; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+
+
+reduce operator [x] <span class="Statement">=</span>
+  x
+
+reduce operator (x1<span class="Statement">:</span>x2<span class="Statement">:</span>xs) <span class="Statement">=</span>
+  reduce operator ((operator x1 x2) <span class="Statement">:</span> xs)
+
+add a b <span class="Statement">=</span> a <span class="Statement">+</span> b
+
+my_sum xs <span class="Statement">=</span>
+  reduce add xs
+
+my_sum2 xs <span class="Statement">=</span>
+  reduce (<span class="Statement">+</span>) xs
+
+my_product xs <span class="Statement">=</span>
+  reduce (<span class="Statement">*</span>) xs
+
+
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

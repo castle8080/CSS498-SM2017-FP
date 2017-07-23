@@ -2,4 +2,6 @@
 *~
 *.o
 *.exe
+*.cmi
+*.cmo
 bin/

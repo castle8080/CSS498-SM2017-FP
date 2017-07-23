@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\snippets\sn013.c.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="c">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Type { color: #2e8b57; font-weight: bold; }
+.Statement { color: #a52a2a; font-weight: bold; }
+.PreProc { color: #a020f0; }
+.Constant { color: #ff00ff; }
+.Special { color: #6a5acd; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="PreProc">#include </span><span class="Constant">&lt;string.h&gt;</span>
+<span class="PreProc">#include </span><span class="Constant">&lt;stdio.h&gt;</span>
+
+<span class="Type">typedef</span> <span class="Type">double</span> (*adjustment_function) (<span class="Type">double</span>);
+
+<span class="Type">double</span> my_double(<span class="Type">double</span> x) { <span class="Statement">return</span> x + x; }
+<span class="Type">double</span> my_square(<span class="Type">double</span> x) { <span class="Statement">return</span> x * x; }
+<span class="Type">double</span> my_same(<span class="Type">double</span> x)   { <span class="Statement">return</span> x; }
+<span class="Type">double</span> my_zero(<span class="Type">double</span> x)   { <span class="Statement">return</span> <span class="Constant">0</span>; }
+
+adjustment_function get_adjustment(<span class="Type">const</span> <span class="Type">char</span> * day) {
+    <span class="Statement">if</span> (strcmp(day, <span class="Constant">&quot;Friday&quot;</span>) == <span class="Constant">0</span>)
+        <span class="Statement">return</span> my_square;
+    <span class="Statement">else</span> <span class="Statement">if</span> (strcmp(day, <span class="Constant">&quot;Monday&quot;</span>) == <span class="Constant">0</span>)
+        <span class="Statement">return</span> my_zero;
+    <span class="Statement">else</span> <span class="Statement">if</span> (strcmp(day, <span class="Constant">&quot;Thursday&quot;</span>) == <span class="Constant">0</span>)
+        <span class="Statement">return</span> my_double;
+    <span class="Statement">else</span>
+        <span class="Statement">return</span> my_same;
+}
+
+<span class="Type">double</span> adjust_salary(<span class="Type">double</span> salary, <span class="Type">const</span> <span class="Type">char</span> * day) {
+    adjustment_function f = get_adjustment(day);
+    <span class="Statement">return</span> f(salary);
+}
+
+<span class="Type">int</span> main (<span class="Type">void</span>) {
+    <span class="Type">double</span> salary = <span class="Constant">15.0</span>;
+    printf(<span class="Constant">&quot;Old salary </span><span class="Special">%f</span><span class="Special">\n</span><span class="Constant">&quot;</span>, salary);
+    printf(<span class="Constant">&quot;New salary </span><span class="Special">%f</span><span class="Special">\n</span><span class="Constant">&quot;</span>, adjust_salary(salary, <span class="Constant">&quot;Thursday&quot;</span>));
+    <span class="Statement">return</span> <span class="Constant">0</span>;
+}
+
+
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

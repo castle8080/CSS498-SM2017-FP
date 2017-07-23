@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\snippets\sn011.ml.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="ocaml">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,expand_tabs,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Statement { color: #a52a2a; font-weight: bold; }
+.PreProc { color: #a020f0; }
+.Constant { color: #ff00ff; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+
+<span class="Statement">let</span> <span class="Statement">(</span>--<span class="Statement">)</span> i j <span class="Statement">=</span>
+  <span class="Statement">let</span> <span class="Statement">rec</span> aux n acc <span class="Statement">=</span>
+    <span class="Statement">if</span> n <span class="Statement">&lt;</span> i
+    <span class="Statement">then</span> acc
+    <span class="Statement">else</span> aux <span class="Statement">(</span>n - <span class="Constant">1</span><span class="Statement">)</span> <span class="Statement">(</span>n <span class="Statement">::</span> acc<span class="Statement">)</span>
+  <span class="Statement">in</span> aux j <span class="Constant">[]</span> <span class="Statement">;;</span>
+
+<span class="Statement">let</span> max2 a b <span class="Statement">=</span> <span class="Statement">if</span> a <span class="Statement">&gt;</span> b <span class="Statement">then</span> a <span class="Statement">else</span> b
+
+<span class="Statement">let</span> <span class="Statement">rec</span> max xs <span class="Statement">=</span>
+  <span class="Statement">match</span> xs <span class="Statement">with</span>
+    <span class="Statement">[</span>x<span class="Statement">]</span> <span class="Statement">-&gt;</span> x
+    <span class="Statement">|</span> hd <span class="Statement">::</span> tl <span class="Statement">-&gt;</span> <span class="Statement">(</span>max2 hd <span class="Statement">(</span>max tl<span class="Statement">))</span><span class="Statement">;;</span>
+
+<span class="Statement">let</span> <span class="Statement">rec</span> max_aux current_max xs <span class="Statement">=</span>
+  <span class="Statement">match</span> xs <span class="Statement">with</span>
+    <span class="Constant">[]</span> <span class="Statement">-&gt;</span> current_max
+    <span class="Statement">|</span> x <span class="Statement">::</span> xss <span class="Statement">-&gt;</span> max_aux <span class="Statement">(</span>max2 current_max x<span class="Statement">)</span> xss
+
+<span class="Statement">let</span> maxx xs <span class="Statement">=</span> max_aux <span class="Statement">(</span><span class="PreProc">List</span>.hd xs<span class="Statement">)</span> <span class="Statement">(</span><span class="PreProc">List</span>.tl xs<span class="Statement">)</span><span class="Statement">;;</span>
+
+<span class="Statement">let</span> max3 xs <span class="Statement">=</span> <span class="PreProc">List</span>.fold_left max2 <span class="Statement">(</span><span class="PreProc">List</span>.hd xs<span class="Statement">)</span> <span class="Statement">(</span><span class="PreProc">List</span>.tl xs<span class="Statement">)</span><span class="Statement">;;</span>
+
+print_int <span class="Statement">(</span>max3 <span class="Statement">(</span><span class="Constant">1</span>--<span class="Constant">10000000</span><span class="Statement">))</span><span class="Statement">;;</span>
+
+
+
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->
