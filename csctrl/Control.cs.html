@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\csctrl\Control.cs.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="cs">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Constant { color: #ff00ff; }
+.Statement { color: #a52a2a; font-weight: bold; }
+.Type { color: #2e8b57; font-weight: bold; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="Statement">using</span> System;
+<span class="Statement">using</span> System.IO;
+
+<span class="Type">namespace</span> csctrl
+{
+
+    <span class="Type">public</span> <span class="Type">static</span> <span class="Type">class</span> Control {
+        <span class="Type">public</span> <span class="Type">static</span> <span class="Type">void</span> ForEach&lt;T&gt;(T[] array, Action&lt;T&gt; action) {
+            <span class="Statement">for</span> (<span class="Type">int</span> i = <span class="Constant">0</span>; i &lt; array.Length; i++)
+                action(array[i]);
+        }
+
+        <span class="Type">public</span> <span class="Type">static</span> T ReadFile&lt;T&gt;(String filePath, Func&lt;TextReader, T&gt; processor) {
+            var fs = <span class="Statement">new</span> StreamReader(<span class="Statement">new</span> FileStream(filePath, FileMode.Open));
+            <span class="Statement">try</span> {
+                <span class="Statement">return</span> processor(fs);
+            }
+            <span class="Statement">finally</span> {
+                fs.Dispose();
+            }
+        }
+
+        <span class="Type">public</span> <span class="Type">static</span> T Retry&lt;T&gt;(<span class="Type">int</span> maxTries, Func&lt;T&gt; operation) {
+            <span class="Type">int</span> tryCount = <span class="Constant">0</span>;
+            <span class="Statement">while</span> (<span class="Constant">true</span>) {
+                <span class="Statement">try</span> {
+                    tryCount++;
+                    <span class="Statement">return</span> operation();
+                }
+                <span class="Statement">catch</span> (Exception e) {
+                    <span class="Statement">if</span> (tryCount &gt;= maxTries)
+                        <span class="Statement">throw</span> e;
+                }
+            }
+        }
+
+    }
+}
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

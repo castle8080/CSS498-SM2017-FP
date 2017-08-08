@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\hsscratch\UsingIO.hs.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="haskell">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Statement { color: #a52a2a; font-weight: bold; }
+.PreProc { color: #a020f0; }
+.Constant { color: #ff00ff; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="PreProc">import</span> Data.List
+<span class="PreProc">import</span> Text.Read
+<span class="PreProc">import</span> Text.Printf
+
+getReversedLine <span class="Statement">::</span> IO String
+getReversedLine <span class="Statement">=</span>
+  getLine <span class="Statement">&gt;&gt;=</span> (<span class="Statement">\</span>line <span class="Statement">-&gt;</span> return <span class="Statement">$</span> reverse line)
+
+getInt <span class="Statement">::</span> IO Int
+getInt <span class="Statement">=</span>
+  getLine <span class="Statement">&gt;&gt;=</span> (<span class="Statement">\</span>line <span class="Statement">-&gt;</span> return <span class="Statement">$</span> read line)
+
+promptForNumber <span class="Statement">::</span> Int <span class="Statement">-&gt;</span> Int <span class="Statement">-&gt;</span> IO Int
+promptForNumber start end <span class="Statement">=</span> <span class="Statement">do</span>
+  printf <span class="Constant">&quot;Choose between %d and %d: &quot;</span> start end
+  line <span class="Statement">&lt;-</span> getLine
+  <span class="Statement">case</span> readMaybe line <span class="Statement">of</span>
+    Just x <span class="Statement">|</span> x <span class="Statement">&gt;=</span> start <span class="Statement">&amp;&amp;</span> x <span class="Statement">&lt;=</span> end <span class="Statement">-&gt;</span>
+      return x
+    _ <span class="Statement">-&gt;</span> <span class="Statement">do</span>
+      putStrLn <span class="Constant">&quot;That doesn't look right!&quot;</span>
+      promptForNumber start end
+
+promptForNumber <span class="Statement">::</span> Int <span class="Statement">-&gt;</span> Int <span class="Statement">-&gt;</span> IO Int
+promptForNumber start end <span class="Statement">=</span>
+  printf <span class="Constant">&quot;Choose between %d and %d: &quot;</span> start end <span class="Statement">&gt;&gt;</span>
+  getLine <span class="Statement">&gt;&gt;=</span> <span class="Statement">\</span>line <span class="Statement">-&gt;</span>
+  <span class="Statement">case</span> readMaybe line <span class="Statement">of</span>
+    Just x <span class="Statement">|</span> x <span class="Statement">&gt;=</span> start <span class="Statement">&amp;&amp;</span> x <span class="Statement">&lt;=</span> end <span class="Statement">-&gt;</span>
+      return x
+    _ <span class="Statement">-&gt;</span>
+      putStrLn <span class="Constant">&quot;That doesn't look right!&quot;</span> <span class="Statement">&gt;&gt;</span>
+      promptForNumber start end
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

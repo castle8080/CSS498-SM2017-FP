@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\hsscratch\MIO.hs.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="haskell">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.PreProc { color: #a020f0; }
+.Type { color: #2e8b57; font-weight: bold; }
+.Statement { color: #a52a2a; font-weight: bold; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+
+<span class="Type">module</span> MIO (
+    World(World),
+    IO
+) <span class="Type">where</span>
+<span class="PreProc">import</span> <span class="PreProc">qualified</span> Prelude <span class="PreProc">as</span> P
+
+<span class="Type">data</span> World <span class="Statement">=</span> World <span class="Type">deriving</span> (P.Show)
+<span class="Type">type</span> IO a <span class="Statement">=</span> World <span class="Statement">-&gt;</span> (a, World)
+
+return <span class="Statement">::</span> a <span class="Statement">-&gt;</span> IO a
+return x <span class="Statement">=</span> (<span class="Statement">\</span>world <span class="Statement">-&gt;</span> (x, world))
+
+(<span class="Statement">&gt;&gt;</span>) <span class="Statement">::</span> IO a <span class="Statement">-&gt;</span> IO b <span class="Statement">-&gt;</span> IO b
+(<span class="Statement">&gt;&gt;</span>) action_a action_b <span class="Statement">=</span>
+  action_a <span class="Statement">&gt;&gt;=</span> (<span class="Statement">\</span>_ <span class="Statement">-&gt;</span> action_b)
+
+(<span class="Statement">&gt;&gt;=</span>) <span class="Statement">::</span> IO a <span class="Statement">-&gt;</span> (a <span class="Statement">-&gt;</span> IO b) <span class="Statement">-&gt;</span> IO b
+(<span class="Statement">&gt;&gt;=</span>) action f <span class="Statement">=</span>
+  (<span class="Statement">\</span>world <span class="Statement">-&gt;</span>
+    <span class="Statement">let</span> (a, world') <span class="Statement">=</span> action world
+    <span class="Statement">in</span> (f a) world')
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

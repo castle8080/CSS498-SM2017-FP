@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\hsscratch\use_memory.hs.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="haskell">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Statement { color: #a52a2a; font-weight: bold; }
+.PreProc { color: #a020f0; }
+.Constant { color: #ff00ff; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="PreProc">import</span> Data.IORef
+<span class="PreProc">import</span> Control.Monad
+
+process1 <span class="Statement">::</span> IORef Int <span class="Statement">-&gt;</span> Int <span class="Statement">-&gt;</span> IO()
+process1 countRef x <span class="Statement">=</span>
+  forM_ [<span class="Constant">1</span><span class="Statement">..</span>x] <span class="Statement">$</span> <span class="Statement">\</span>n <span class="Statement">-&gt;</span> <span class="Statement">do</span>
+    putStrLn <span class="Constant">&quot;Do process 1&quot;</span>
+    modifyIORef countRef (<span class="Statement">+</span><span class="Constant">1</span>)
+
+main <span class="Statement">::</span> IO ()
+main <span class="Statement">=</span> <span class="Statement">do</span>
+  countRef <span class="Statement">&lt;-</span> newIORef <span class="Constant">0</span>
+  count <span class="Statement">&lt;-</span> readIORef countRef
+  putStrLn <span class="Statement">$</span> <span class="Constant">&quot;Count at start: &quot;</span> <span class="Statement">++</span> (show count)
+  process1 countRef <span class="Constant">3</span>
+  count <span class="Statement">&lt;-</span> readIORef countRef
+  putStrLn <span class="Statement">$</span> <span class="Constant">&quot;Count at end: &quot;</span> <span class="Statement">++</span> (show count)
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

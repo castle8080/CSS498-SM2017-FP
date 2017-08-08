@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\ScalaSample\src\main\scala\InsidesMutating.scala.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="scala">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,expand_tabs,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Constant { color: #ff00ff; }
+.Comment { color: #0000ff; }
+.Identifier { color: #008b8b; }
+.Statement { color: #a52a2a; font-weight: bold; }
+.PreProc { color: #a020f0; }
+.Type { color: #2e8b57; font-weight: bold; }
+.Special { color: #6a5acd; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="PreProc">import</span> scala.collection.immutable
+
+<span class="Statement">object</span> <span class="Special">InsidesMutating</span> {
+
+  <span class="Statement">class</span> <span class="Special">AccountX</span>(<span class="Statement">var</span> <span class="Identifier">id</span>: <span class="Type">String</span>, <span class="Statement">var</span> <span class="Identifier">name</span>: <span class="Type">String</span>, <span class="Statement">var</span> <span class="Identifier">balance</span>: <span class="Type">Double</span>) {
+    <span class="Identifier">override</span> <span class="Statement">def</span> <span class="Identifier">toString</span>(): <span class="Type">String</span> = <span class="Special">s&quot;</span><span class="Constant">Account: Name=</span><span class="Identifier">${</span>name<span class="Identifier">}</span><span class="Constant"> Balance=</span><span class="Identifier">${</span>balance<span class="Identifier">}</span><span class="Special">&quot;</span>
+  }
+
+  <span class="Statement">class</span> <span class="Special">AccountY</span>(<span class="Statement">val</span> <span class="Identifier">id</span>: <span class="Type">String</span>, <span class="Statement">val</span> <span class="Identifier">name</span>: <span class="Type">String</span>, <span class="Statement">val</span> <span class="Identifier">balance</span>: <span class="Type">Double</span>) {
+
+    <span class="Identifier">override</span> <span class="Statement">def</span> <span class="Identifier">toString</span>(): <span class="Type">String</span> = <span class="Special">s&quot;</span><span class="Constant">Account: Name=</span><span class="Identifier">${</span>name<span class="Identifier">}</span><span class="Constant"> Balance=</span><span class="Identifier">${</span>balance<span class="Identifier">}</span><span class="Special">&quot;</span>
+
+    <span class="Statement">def</span> <span class="Identifier">WithBalance</span>(_balance: <span class="Type">Double</span>) = <span class="PreProc">new</span> <span class="Special">Account</span>(id, name, _balance)
+
+    <span class="Statement">def</span> <span class="Identifier">WithName</span>(_name: <span class="Type">String</span>) = <span class="PreProc">new</span> <span class="Special">Account</span>(id, _name, balance)
+  }
+
+  <span class="Statement">case</span> <span class="Statement">class</span> <span class="Special">Account</span>(id: <span class="Type">String</span>, name: <span class="Type">String</span>, balance: <span class="Type">Double</span>)
+
+  <span class="Statement">def</span> <span class="Identifier">main</span>(args: <span class="Type">Array</span><span class="Type">[</span><span class="Type">String</span><span class="Type">]</span>): <span class="Type">Unit</span> = {
+
+    <span class="Statement">val</span> <span class="Identifier">accounts</span> = immutable.<span class="Special">HashMap</span>.empty +
+      (<span class="Constant">&quot;a1&quot;</span> <span class="PreProc">-&gt;</span> <span class="Special">Account</span>(<span class="Constant">&quot;a1&quot;</span>, <span class="Constant">&quot;Bob&quot;</span>, <span class="Constant">90.0</span>)) +
+      (<span class="Constant">&quot;a2&quot;</span> <span class="PreProc">-&gt;</span> <span class="Special">Account</span>(<span class="Constant">&quot;a2&quot;</span>, <span class="Constant">&quot;Joe&quot;</span>, <span class="Constant">70.0</span>))
+
+    println(accounts)
+    <span class="Comment">//val accountsA = accounts.updated(&quot;a1&quot;, { accounts(&quot;a1&quot;).balance -= 10; accounts(&quot;a1&quot;); })</span>
+    <span class="Statement">val</span> <span class="Identifier">accountsA</span> = accounts.updated(<span class="Constant">&quot;a1&quot;</span>, {
+      <span class="Statement">val</span> <span class="Identifier">account</span> = accounts(<span class="Constant">&quot;a1&quot;</span>)
+      account.copy(balance = account.balance - <span class="Constant">10</span>)
+    })
+    println(accounts)
+    println(accountsA)
+
+  }
+
+}
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

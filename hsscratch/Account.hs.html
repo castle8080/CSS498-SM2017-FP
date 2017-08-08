@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\hsscratch\Account.hs.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="haskell">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Constant { color: #ff00ff; }
+.Type { color: #2e8b57; font-weight: bold; }
+.Statement { color: #a52a2a; font-weight: bold; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+
+<span class="Type">data</span> Account <span class="Statement">=</span>
+  Account {
+    id <span class="Statement">::</span> String,
+    name <span class="Statement">::</span> String,
+    balance <span class="Statement">::</span> Double
+  } <span class="Type">deriving</span> (Show, Eq, Read)
+
+a1 <span class="Statement">=</span> Account <span class="Constant">&quot;a1&quot;</span> <span class="Constant">&quot;Bob&quot;</span> <span class="Constant">90</span>
+
+a2 <span class="Statement">=</span> a { balance <span class="Statement">=</span> (balance a) <span class="Statement">-</span> <span class="Constant">10</span> }
+
+
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

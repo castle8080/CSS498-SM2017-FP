@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\ScalaSample\src\main\scala\WordCount.scala.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="scala">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,expand_tabs,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Constant { color: #ff00ff; }
+.Identifier { color: #008b8b; }
+.Statement { color: #a52a2a; font-weight: bold; }
+.PreProc { color: #a020f0; }
+.Type { color: #2e8b57; font-weight: bold; }
+.Special { color: #6a5acd; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="PreProc">import</span> scala.io._
+<span class="PreProc">import</span> scala.collection._
+<span class="PreProc">import</span> scala.collection.<span class="Special">JavaConverters</span>._
+<span class="PreProc">import</span> scala.collection.mutable
+<span class="PreProc">import</span> scala.collection.immutable
+<span class="PreProc">import</span> gnu.trove.decorator.<span class="Special">TObjectIntMapDecorator</span>
+<span class="PreProc">import</span> gnu.trove.map.hash.<span class="Special">TObjectIntHashMap</span>
+
+<span class="Statement">object</span> <span class="Special">WordCount</span> {
+
+  <span class="Statement">def</span> <span class="Identifier">toWords</span>(lines: <span class="Type">Array</span><span class="Type">[</span><span class="Type">String</span><span class="Type">]</span>): <span class="Type">Array</span><span class="Type">[</span><span class="Type">String</span><span class="Type">]</span> = {
+    lines
+      .flatMap(line <span class="PreProc">=&gt;</span> line.split(<span class="Constant">&quot;</span><span class="Identifier">\\</span><span class="Constant">s+&quot;</span>))
+      .map(word <span class="PreProc">=&gt;</span> word.toLowerCase.replaceAll(<span class="Constant">&quot;[^a-z]&quot;</span>, <span class="Constant">&quot;&quot;</span>))
+      .filter(word <span class="PreProc">=&gt;</span> !word.isEmpty)
+  }
+
+  <span class="Statement">def</span> <span class="Identifier">countWordsMutable</span>(words: <span class="Type">Seq</span><span class="Type">[</span><span class="Type">String</span><span class="Type">]</span>): <span class="Type">Map</span><span class="Type">[</span><span class="Type">String</span>, <span class="Type">Int</span><span class="Type">]</span> = {
+    <span class="Statement">val</span> <span class="Identifier">counts</span> = <span class="PreProc">new</span> <span class="Special">mutable.HashMap</span><span class="Type">[</span><span class="Type">String</span>, <span class="Type">Int</span><span class="Type">]</span>()
+    <span class="Statement">for</span> (word <span class="PreProc">&lt;-</span> words) {
+      counts(word) = counts.getOrElse(word, <span class="Constant">0</span>)
+    }
+    counts
+  }
+
+  <span class="Statement">def</span> <span class="Identifier">countWordsMutableJava</span>(words: <span class="Type">Seq</span><span class="Type">[</span><span class="Type">String</span><span class="Type">]</span>)
+    : <span class="Type">java.util.HashMap</span><span class="Type">[</span><span class="Type">String</span>, <span class="Type">Int</span><span class="Type">]</span> =
+  {
+    <span class="Statement">val</span> <span class="Identifier">counts</span> = <span class="PreProc">new</span> <span class="Special">java.util.HashMap</span><span class="Type">[</span><span class="Type">String</span>, <span class="Type">Int</span><span class="Type">]</span>()
+    <span class="Statement">for</span> (word <span class="PreProc">&lt;-</span> words) {
+      counts.put(word, counts.getOrDefault(word, <span class="Constant">0</span>) + <span class="Constant">1</span>)
+    }
+    counts
+  }
+
+  <span class="Statement">def</span> <span class="Identifier">countWordsImmutable</span>(words: <span class="Type">Seq</span><span class="Type">[</span><span class="Type">String</span><span class="Type">]</span>): <span class="Type">Map</span><span class="Type">[</span><span class="Type">String</span>, <span class="Type">Int</span><span class="Type">]</span> = {
+    words.foldLeft(<span class="PreProc">new</span> <span class="Special">immutable.HashMap</span><span class="Type">[</span><span class="Type">String</span>, <span class="Type">Int</span><span class="Type">]</span>) { (counts, word) <span class="PreProc">=&gt;</span>
+      counts.updated(word, counts.getOrElse(word, <span class="Constant">0</span>) + <span class="Constant">1</span>)
+    }
+  }
+
+  <span class="Statement">def</span> <span class="Identifier">countWordsPrimitiveMap</span>(words: <span class="Type">Seq</span><span class="Type">[</span><span class="Type">String</span><span class="Type">]</span>): <span class="Type">TObjectIntHashMap</span><span class="Type">[</span><span class="Type">String</span><span class="Type">]</span> = {
+    <span class="Statement">val</span> <span class="Identifier">counts</span> = <span class="PreProc">new</span> <span class="Special">TObjectIntHashMap</span><span class="Type">[</span><span class="Type">String</span><span class="Type">]</span>()
+    <span class="Statement">for</span> (word <span class="PreProc">&lt;-</span> words) {
+      counts.put(word, <span class="Statement">if</span> (counts.containsKey(word)) counts.get(word) + <span class="Constant">1</span> <span class="Statement">else</span> <span class="Constant">1</span>)
+    }
+    counts
+  }
+
+  <span class="Statement">def</span> <span class="Identifier">countWordsTree</span>(words: <span class="Type">Seq</span><span class="Type">[</span><span class="Type">String</span><span class="Type">]</span>): <span class="Type">Map</span><span class="Type">[</span><span class="Type">String</span>, <span class="Type">Int</span><span class="Type">]</span> = {
+    words.foldLeft(<span class="PreProc">new</span> <span class="Special">immutable.TreeMap</span><span class="Type">[</span><span class="Type">String</span>, <span class="Type">Int</span><span class="Type">]</span>) { (counts, word) <span class="PreProc">=&gt;</span>
+      counts.updated(word, counts.getOrElse(word, <span class="Constant">0</span>))
+    }
+  }
+
+  <span class="Statement">def</span> <span class="Identifier">runTest</span><span class="Type">[</span><span class="Type">T</span><span class="Type">]</span>(name: <span class="Type">String</span>, words: <span class="Type">Seq</span><span class="Type">[</span><span class="Type">String</span><span class="Type">]</span>, counter: <span class="Type">Seq</span><span class="Type">[</span><span class="Type">String</span><span class="Type">]</span> <span class="Statement">=&gt;</span> <span class="Type">T</span>) = {
+    <span class="Statement">val</span> <span class="Identifier">st</span> = <span class="Special">System</span>.nanoTime()
+    <span class="Statement">val</span> <span class="Identifier">counts</span> = counter(words)
+    <span class="Statement">val</span> <span class="Identifier">et</span> = <span class="Special">System</span>.nanoTime() - st
+    println(name + <span class="Constant">&quot;,&quot;</span> + (et / <span class="Constant">1000000.0</span>) + <span class="Constant">&quot;,&quot;</span> + words.size)
+    et
+  }
+
+  <span class="Statement">def</span> <span class="Identifier">main</span>(args: <span class="Type">Array</span><span class="Type">[</span><span class="Type">String</span><span class="Type">]</span>): <span class="Type">Unit</span> = {
+    <span class="Statement">val</span> <span class="Identifier">content</span> = toWords(<span class="Special">Source</span>.fromFile(<span class="Constant">&quot;pg100.txt&quot;</span>, <span class="Constant">&quot;UTF-8&quot;</span>).getLines().toArray)
+    <span class="Statement">val</span> <span class="Identifier">words</span> = <span class="Special">Iterator</span>.continually(content).flatten.take(<span class="Constant">30000000</span>).toArray
+
+    runTest(<span class="Constant">&quot;immutable&quot;</span>, words.take(<span class="Constant">5000</span>), countWordsImmutable)
+    runTest(<span class="Constant">&quot;mutableJava&quot;</span>, words.take(<span class="Constant">5000</span>), countWordsMutableJava)
+
+    println(<span class="Constant">&quot;name,time,count&quot;</span>)
+
+    <span class="Statement">var</span> <span class="Identifier">x</span> = <span class="Constant">10000.0</span>
+    <span class="Statement">while</span> (x &lt; <span class="Constant">30000000</span>) {
+      runTest(<span class="Constant">&quot;immutable&quot;</span>, words.take(x.toInt), countWordsImmutable)
+      x = x * <span class="Constant">1.05</span>
+    }
+    x = <span class="Constant">10000.0</span>
+    <span class="Statement">while</span> (x &lt; <span class="Constant">30000000</span>) {
+      runTest(<span class="Constant">&quot;mutableJava&quot;</span>, words.take(x.toInt), countWordsMutableJava)
+      x = x * <span class="Constant">1.05</span>
+    }
+  }
+
+}
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\hsscratch\getURL.hs.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="haskell">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Statement { color: #a52a2a; font-weight: bold; }
+.PreProc { color: #a020f0; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="PreProc">import</span> Network.HTTP.Client
+<span class="PreProc">import</span> Network.HTTP.Client.TLS
+<span class="PreProc">import</span> <span class="PreProc">qualified</span> Data.ByteString <span class="PreProc">as</span> BS
+<span class="PreProc">import</span> <span class="PreProc">qualified</span> Data.ByteString.UTF8 <span class="PreProc">as</span> UTF8
+
+getURL <span class="Statement">::</span> String <span class="Statement">-&gt;</span> IO String
+getURL url <span class="Statement">=</span> <span class="Statement">do</span>
+  manager <span class="Statement">&lt;-</span> newManager tlsManagerSettings
+  request <span class="Statement">&lt;-</span> parseRequest url
+  withResponse request manager <span class="Statement">$</span> <span class="Statement">\</span>response <span class="Statement">-&gt;</span> <span class="Statement">do</span>
+    bytes <span class="Statement">&lt;-</span> brConsume <span class="Statement">$</span> responseBody response
+    return <span class="Statement">$</span> UTF8.toString <span class="Statement">$</span> BS.concat bytes
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\ScalaSample\src\main\scala\BankAccount.scala.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="scala">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,expand_tabs,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Constant { color: #ff00ff; }
+.Identifier { color: #008b8b; }
+.Statement { color: #a52a2a; font-weight: bold; }
+.PreProc { color: #a020f0; }
+.Type { color: #2e8b57; font-weight: bold; }
+.Special { color: #6a5acd; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+
+
+<span class="Statement">class</span> <span class="Special">BankAccountX</span>(<span class="Identifier">private</span> <span class="Statement">var</span> <span class="Identifier">_balance</span>: <span class="Type">Double</span>, <span class="Statement">val</span> <span class="Identifier">holder</span>: <span class="Type">String</span>) {
+
+    <span class="Statement">def</span> <span class="Identifier">balance</span> = _balance;
+
+    <span class="Statement">def</span> <span class="Identifier">deposit</span>(amount: <span class="Type">Double</span>) = {
+        <span class="Statement">if</span> (_balance + amount &lt; <span class="Constant">0</span>)
+            <span class="Statement">throw</span> <span class="PreProc">new</span> <span class="Special">Exception</span>(<span class="Constant">&quot;You don't have enough money!&quot;</span>)
+        _balance = _balance + amount
+    }
+
+    <span class="Statement">def</span> <span class="Identifier">withdraw</span>(amount: <span class="Type">Double</span>) =
+      deposit(-amount)
+
+    <span class="Identifier">override</span> <span class="Statement">def</span> <span class="Identifier">toString</span>() =
+      <span class="Special">s&quot;</span><span class="Constant">Account for </span><span class="Identifier">$holder</span><span class="Constant"> has a balance of </span><span class="Identifier">$balance</span><span class="Constant">.</span><span class="Special">&quot;</span>
+}
+
+<span class="Statement">class</span> <span class="Special">BankAccount</span>(<span class="Statement">val</span> <span class="Identifier">balance</span>: <span class="Type">Double</span>, <span class="Statement">val</span> <span class="Identifier">holder</span>: <span class="Type">String</span>) {
+    <span class="Statement">def</span> <span class="Identifier">deposit</span>(amount: <span class="Type">Double</span>) = {
+        <span class="Statement">if</span> (balance + amount &lt; <span class="Constant">0</span>)
+            <span class="Statement">throw</span> <span class="PreProc">new</span> <span class="Special">Exception</span>(<span class="Constant">&quot;You don't have enough money!&quot;</span>)
+        <span class="PreProc">new</span> <span class="Special">BankAccount</span>(balance + amount, holder)
+    }
+
+    <span class="Statement">def</span> <span class="Identifier">withdraw</span>(amount: <span class="Type">Double</span>) =
+        deposit(-amount)
+
+    <span class="Identifier">override</span> <span class="Statement">def</span> <span class="Identifier">toString</span>() =
+        <span class="Special">s&quot;</span><span class="Constant">Account for </span><span class="Identifier">$holder</span><span class="Constant"> has a balance of </span><span class="Identifier">$balance</span><span class="Constant">.</span><span class="Special">&quot;</span>
+}
+
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

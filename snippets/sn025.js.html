@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\snippets\sn025.js.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="javascript">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Identifier { color: #008b8b; }
+.Statement { color: #a52a2a; font-weight: bold; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+
+<span class="Identifier">function</span> add2(a, b) <span class="Identifier">{</span> <span class="Statement">return</span> a + b; <span class="Identifier">}</span>
+
+<span class="Identifier">function</span> add2(a) <span class="Identifier">{</span>
+    <span class="Statement">return</span> <span class="Identifier">function</span>(b) <span class="Identifier">{</span>
+      <span class="Statement">return</span> a + b;
+    <span class="Identifier">}</span>
+<span class="Identifier">}</span>
+
+<span class="Identifier">var</span> add2 = (a) =&gt; (b) =&gt; a + b;
+
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

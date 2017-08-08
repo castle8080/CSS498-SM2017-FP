@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>D:\bryanc\education\CSS498-SM2017-FP\csctrl\Program.cs.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="cs">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Constant { color: #ff00ff; }
+.Statement { color: #a52a2a; font-weight: bold; }
+.Comment { color: #0000ff; }
+.Type { color: #2e8b57; font-weight: bold; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="Statement">using</span> System;
+<span class="Statement">using</span> System.Linq;
+<span class="Statement">using</span> System.Net.Http;
+<span class="Statement">using</span> System.Threading;
+<span class="Statement">using</span> System.Collections.Generic;
+
+<span class="Statement">using</span> <span class="Type">static</span> csctrl.Control;
+
+<span class="Type">namespace</span> csctrl
+{
+
+    <span class="Type">class</span> Program
+    {
+
+        <span class="Type">static</span> <span class="Type">void</span> Main2(<span class="Type">string</span>[] args)
+        {
+            <span class="Type">int</span>[] numbers = { <span class="Constant">1</span>, <span class="Constant">2</span> };
+            ForEach(numbers, x =&gt; {
+                Console.WriteLine($<span class="Constant">&quot;Have x -&gt; {x}!&quot;</span>);
+            });
+
+            var hc = <span class="Statement">new</span> HttpClient();
+            var content = Retry(<span class="Constant">3</span>, () =&gt; {
+                <span class="Statement">return</span> hc.GetStringAsync(<span class="Constant">&quot;<a href="https://www.google.com/#q=folds">https://www.google.com/#q=folds</a>&quot;</span>).Result;
+            });
+            Console.WriteLine(content);
+
+
+            var fileContent = ReadFile(<span class="Constant">&quot;Control.cs&quot;</span>, (tr) =&gt; tr.ReadToEnd());
+            Console.WriteLine(fileContent);
+        }
+
+        <span class="Type">static</span> <span class="Type">void</span> Main(<span class="Type">string</span>[] args) {
+            <span class="Comment">/*</span>
+<span class="Comment">            ILockManager manager = new RedisLockManager(&quot;localhost:6379&quot;);</span>
+<span class="Comment">            Console.WriteLine($&quot;[{DateTime.Now}] Starting program!&quot;);</span>
+<span class="Comment">            manager.WithLock(&quot;master&quot;, () =&gt; {</span>
+<span class="Comment">                Console.WriteLine($&quot;[{DateTime.Now}] Have lock!&quot;);</span>
+<span class="Comment">                Thread.Sleep(5000);</span>
+<span class="Comment">                Console.WriteLine($&quot;[{DateTime.Now}] Done with lock!&quot;);</span>
+<span class="Comment">                return true;</span>
+<span class="Comment">            });</span>
+<span class="Comment">            */</span>
+
+
+            var queue = <span class="Statement">new</span> Queue&lt;<span class="Type">int</span>&gt;();
+            queue.Enqueue(<span class="Constant">1</span>);
+            queue.Enqueue(<span class="Constant">10</span>);
+            <span class="Statement">while</span> (queue.Count &gt; <span class="Constant">0</span>) {
+                Console.WriteLine(<span class="Constant">&quot;Item: &quot;</span> + queue.Dequeue());
+            }
+        }
+
+    }
+}
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

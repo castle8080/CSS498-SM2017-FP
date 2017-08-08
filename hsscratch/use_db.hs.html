@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\hsscratch\use_db.hs.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="haskell">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Statement { color: #a52a2a; font-weight: bold; }
+.PreProc { color: #a020f0; }
+.Constant { color: #ff00ff; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="PreProc">import</span> Database.HDBC
+<span class="PreProc">import</span> Database.HDBC.Sqlite3
+<span class="PreProc">import</span> Control.Monad
+<span class="PreProc">import</span> Data.List
+
+getNames <span class="Statement">::</span> IO [String]
+getNames <span class="Statement">=</span> <span class="Statement">do</span>
+  conn <span class="Statement">&lt;-</span> connectSqlite3 <span class="Constant">&quot;test.db&quot;</span>
+  st <span class="Statement">&lt;-</span> prepare conn <span class="Constant">&quot;select name from people&quot;</span>
+  execute st []
+  rows <span class="Statement">&lt;-</span> fetchAllRows st
+  return <span class="Statement">$</span> map (<span class="Statement">\</span>row <span class="Statement">-&gt;</span> fromSql <span class="Statement">$</span> row <span class="Statement">!!</span> <span class="Constant">0</span>) rows
+
+main <span class="Statement">::</span> IO ()
+main <span class="Statement">=</span> <span class="Statement">do</span>
+  names <span class="Statement">&lt;-</span> getNames
+  forM_ names putStrLn
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

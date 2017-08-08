@@ -4,4 +4,15 @@
 *.exe
 *.cmi
 *.cmo
+*.swp
+*.swo
+*.class
+*#
+csctrl/obj
+*.log
 bin/
+ScalaSample/target/
+ScalaSample/project/target/
+JavaSamples/.idea/
+JavaSamples/out/
+ScalaSample/project/target/

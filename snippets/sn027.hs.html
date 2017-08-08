@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\snippets\sn027.hs.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="haskell">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Statement { color: #a52a2a; font-weight: bold; }
+.Constant { color: #ff00ff; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+
+
+reduce <span class="Statement">::</span> (a <span class="Statement">-&gt;</span> a <span class="Statement">-&gt;</span> a) <span class="Statement">-&gt;</span> [a] <span class="Statement">-&gt;</span> Maybe a
+reduce reducer [x] <span class="Statement">=</span> Just x
+reduce reducer [] <span class="Statement">=</span> Nothing
+reduce reducer xs <span class="Statement">=</span>
+  <span class="Statement">let</span> xslen <span class="Statement">=</span> length xs
+      xsa <span class="Statement">=</span> reduce reducer <span class="Statement">$</span> take (xslen <span class="Statement">`div`</span> <span class="Constant">2</span>) xs
+      xsb <span class="Statement">=</span> reduce reducer <span class="Statement">$</span> drop (xslen <span class="Statement">`div`</span> <span class="Constant">2</span>) xs
+  <span class="Statement">in</span>
+    <span class="Statement">case</span> (xsa, xsb) <span class="Statement">of</span>
+      (Just a, Just b)  <span class="Statement">-&gt;</span> Just <span class="Statement">$</span> reducer a b
+      (Just a, Nothing) <span class="Statement">-&gt;</span> Just a
+      (Nothing, Just b) <span class="Statement">-&gt;</span> Just b
+      (_, _)            <span class="Statement">-&gt;</span> Nothing
+
+
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

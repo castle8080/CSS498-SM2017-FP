@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\JavaSamples\src\org\castillo\Main.java.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="java">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Constant { color: #ff00ff; }
+.PreProc { color: #a020f0; }
+.Type { color: #2e8b57; font-weight: bold; }
+.Statement { color: #a52a2a; font-weight: bold; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="PreProc">package</span> org.castillo;
+
+<span class="PreProc">import</span> java.util.regex.Pattern;
+<span class="PreProc">import</span> java.util.function.*;
+
+<span class="Type">class</span> Greeter <span class="Type">implements</span> Function&lt;String, String&gt; {
+
+    <span class="Type">private</span> <span class="Type">final</span> String[] parts;
+
+    <span class="Type">public</span> Greeter(String format) {
+        parts = format.split(Pattern.quote(<span class="Constant">&quot;#{name}&quot;</span>));
+    }
+
+    <span class="Type">public</span> String apply(String name) {
+        <span class="Statement">return</span> String.join(name, parts);
+    }
+}
+
+<span class="Type">public</span> <span class="Type">class</span> Main {
+
+    <span class="Type">public</span> <span class="Type">static</span> Function&lt;String, String&gt; createGreeter(String format) {
+        String[] parts = format.split(Pattern.quote(<span class="Constant">&quot;#{name}&quot;</span>));
+        <span class="Statement">return</span> (String name) -&gt; String.join(name, parts);
+    }
+
+    <span class="Type">public</span> <span class="Type">static</span> <span class="Type">void</span> main(String[] args) {
+        Function&lt;String, String&gt; nice = createGreeter(<span class="Constant">&quot;Hi #{name}!&quot;</span>);
+        Function&lt;String, String&gt; mean = createGreeter(<span class="Constant">&quot;Go away #{name}!&quot;</span>);
+
+        System.out.println(nice.apply(<span class="Constant">&quot;Joe&quot;</span>));
+        System.out.println(mean.apply(<span class="Constant">&quot;Bob&quot;</span>));
+    }
+}
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

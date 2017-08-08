@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\csctrl\RedisLock.cs.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="cs">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Statement { color: #a52a2a; font-weight: bold; }
+.Type { color: #2e8b57; font-weight: bold; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+
+<span class="Type">namespace</span> csctrl {
+    <span class="Statement">using</span> ServiceStack.Redis;
+    <span class="Statement">using</span> System;
+
+    <span class="Type">public</span> <span class="Type">interface</span> ILockManager {
+        T WithLock&lt;T&gt;(<span class="Type">string</span> lockName, Func&lt;T&gt; body);
+    }
+
+    <span class="Type">public</span> <span class="Type">class</span> RedisLockManager : ILockManager {
+
+        <span class="Type">private</span> RedisManagerPool pool;
+
+        <span class="Type">public</span> RedisLockManager(<span class="Type">string</span> redisConnection) {
+            pool = <span class="Statement">new</span> RedisManagerPool(redisConnection);
+        }
+
+        <span class="Type">public</span> T WithLock&lt;T&gt;(<span class="Type">string</span> lockName, Func&lt;T&gt; body) {
+            <span class="Statement">using</span> (var client = pool.GetClient()) {
+                <span class="Statement">using</span> (var lck = client.AcquireLock(lockName)) {
+                    <span class="Statement">return</span> body();
+                }
+            }
+        }
+    }
+
+}
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

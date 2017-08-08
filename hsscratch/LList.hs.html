@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\hsscratch\LList.hs.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="haskell">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Constant { color: #ff00ff; }
+.Type { color: #2e8b57; font-weight: bold; }
+.Statement { color: #a52a2a; font-weight: bold; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="Type">module</span> LList (
+    LList(LLNil,LLCons),
+    ll_head,
+    ll_tail,
+    ll_length,
+    ll_update,
+    ll_append,
+    ll_create
+) <span class="Type">where</span>
+
+<span class="Type">data</span> LList a <span class="Statement">=</span>
+    LLNil <span class="Statement">|</span>
+    LLCons a (LList a)
+    <span class="Type">deriving</span> (Eq, Ord, Show, Read)
+
+ll_head (LLCons x _) <span class="Statement">=</span> x
+
+ll_tail (LLCons _ xs) <span class="Statement">=</span> xs
+
+ll_length LLNil <span class="Statement">=</span> <span class="Constant">0</span>
+ll_length (LLCons _ xs) <span class="Statement">=</span>
+    <span class="Constant">1</span> <span class="Statement">+</span> (ll_length xs)
+
+ll_update (LLCons _ xs) <span class="Constant">0</span> x <span class="Statement">=</span>
+    LLCons x <span class="Statement">$</span> xs
+
+ll_update (LLCons v xs) n x <span class="Statement">=</span>
+    LLCons v <span class="Statement">$</span> ll_update xs (n <span class="Statement">-</span> <span class="Constant">1</span>) x
+
+ll_append LLNil x <span class="Statement">=</span>
+    LLCons x <span class="Statement">$</span> LLNil
+
+ll_append (LLCons v xs) x <span class="Statement">=</span>
+    LLCons v <span class="Statement">$</span> ll_append xs x
+
+ll_create [] <span class="Statement">=</span> LLNil
+ll_create (x<span class="Statement">:</span>xs) <span class="Statement">=</span> LLCons x <span class="Statement">$</span> ll_create xs
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

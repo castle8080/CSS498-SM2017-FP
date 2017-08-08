@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\hsscratch\Queue.hs.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="haskell">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.PreProc { color: #a020f0; }
+.Comment { color: #0000ff; }
+.Type { color: #2e8b57; font-weight: bold; }
+.Statement { color: #a52a2a; font-weight: bold; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="Type">module</span> Queue (
+    Queue,
+    q_empty,
+    q_enqueue,
+    q_dequeue,
+    q_enqueue_all,
+    q_dequeue_all
+) <span class="Type">where</span>
+
+<span class="PreProc">import</span> Data.Maybe
+<span class="PreProc">import</span> Data.List
+
+<span class="Comment">-- A queue can be implemented with 2 lists.</span>
+<span class="Comment">-- The first list is where incoming elements go.</span>
+<span class="Comment">-- The second list is where elements are pulled from.</span>
+<span class="Type">type</span> Queue a <span class="Statement">=</span> ([a], [a])
+
+<span class="Comment">-- The empty queue.</span>
+q_empty <span class="Statement">::</span> Queue a
+q_empty <span class="Statement">=</span> ([], [])
+
+<span class="Comment">-- Adds an element to a queue.</span>
+q_enqueue <span class="Statement">::</span> a <span class="Statement">-&gt;</span> (Queue a) <span class="Statement">-&gt;</span> (Queue a)
+q_enqueue x (q_in, q_out) <span class="Statement">=</span> (x <span class="Statement">:</span> q_in, q_out)
+
+<span class="Comment">-- Removes an element from a queue.</span>
+q_dequeue <span class="Statement">::</span> (Queue a) <span class="Statement">-&gt;</span> (Maybe a, Queue a)
+<span class="Comment">-- The queue is empty.</span>
+q_dequeue ([], []) <span class="Statement">=</span>
+    (Nothing, ([], []))
+<span class="Comment">-- The outgoing list has an element.</span>
+q_dequeue (q_in, x <span class="Statement">:</span> q_out) <span class="Statement">=</span>
+    (Just x, (q_in, q_out))
+<span class="Comment">-- The outoing list is empty but the incoming list is not.</span>
+q_dequeue (q_in, []) <span class="Statement">=</span>
+    q_dequeue ([], reverse q_in)
+
+
+q_enqueue_all <span class="Statement">::</span> [a] <span class="Statement">-&gt;</span> (Queue a) <span class="Statement">-&gt;</span> (Queue a)
+q_enqueue_all xs q <span class="Statement">=</span> foldl (<span class="Statement">\</span>q x <span class="Statement">-&gt;</span> q_enqueue x q) q xs
+
+q_dequeue_all <span class="Statement">::</span> (Queue a) <span class="Statement">-&gt;</span> [a]
+q_dequeue_all q <span class="Statement">=</span>
+    <span class="Statement">case</span> q_dequeue q <span class="Statement">of</span>
+        (Nothing, _) <span class="Statement">-&gt;</span> []
+        (Just x, q') <span class="Statement">-&gt;</span> x <span class="Statement">:</span> q_dequeue_all q'
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

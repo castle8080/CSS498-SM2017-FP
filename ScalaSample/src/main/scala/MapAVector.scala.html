@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>D:\bryanc\education\CSS498-SM2017-FP\ScalaSample\src\main\scala\MapAVector.scala.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="scala">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,expand_tabs,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Constant { color: #ff00ff; }
+.Identifier { color: #008b8b; }
+.Statement { color: #a52a2a; font-weight: bold; }
+.PreProc { color: #a020f0; }
+.Type { color: #2e8b57; font-weight: bold; }
+.Special { color: #6a5acd; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="PreProc">import</span> scala.collection.<span class="Special">Seq</span>
+<span class="PreProc">import</span> scala.collection.immutable._
+<span class="PreProc">import</span> scala.collection.mutable.<span class="Special">ArrayBuffer</span>
+
+
+<span class="Statement">object</span> <span class="Special">MapAVector</span> {
+
+  <span class="Statement">def</span> <span class="Identifier">mapByPure</span>(xs: <span class="Type">Vector</span><span class="Type">[</span><span class="Type">Int</span><span class="Type">]</span>)(f: <span class="Type">Int</span> <span class="Statement">=&gt;</span> <span class="Type">Int</span>): <span class="Type">Vector</span><span class="Type">[</span><span class="Type">Int</span><span class="Type">]</span> = {
+    (<span class="Constant">0</span> until xs.length).foldLeft(xs) { (xs, i) <span class="PreProc">=&gt;</span> xs.updated(i, f(xs(i))) }
+  }
+
+  <span class="Statement">def</span> <span class="Identifier">mapByNative</span>(xs: <span class="Type">Vector</span><span class="Type">[</span><span class="Type">Int</span><span class="Type">]</span>)(f: <span class="Type">Int</span> <span class="Statement">=&gt;</span> <span class="Type">Int</span>): <span class="Type">Vector</span><span class="Type">[</span><span class="Type">Int</span><span class="Type">]</span> = {
+    xs.map(f)
+  }
+
+  <span class="Statement">def</span> <span class="Identifier">mapByImpure</span>(xs: <span class="Type">Vector</span><span class="Type">[</span><span class="Type">Int</span><span class="Type">]</span>)(f: <span class="Type">Int</span> <span class="Statement">=&gt;</span> <span class="Type">Int</span>): <span class="Type">Vector</span><span class="Type">[</span><span class="Type">Int</span><span class="Type">]</span> = {
+    <span class="Statement">val</span> <span class="Identifier">a</span> = xs.toArray
+    <span class="Statement">for</span> (i <span class="PreProc">&lt;-</span> <span class="Constant">1</span> until a.length) {
+      a(i) = f(a(i))
+    }
+    a.toVector
+  }
+
+  <span class="Statement">def</span> <span class="Identifier">runTest</span>(name: <span class="Type">String</span>, numbers: <span class="Type">Vector</span><span class="Type">[</span><span class="Type">Int</span><span class="Type">]</span>, mutator: <span class="Type">Vector</span><span class="Type">[</span><span class="Type">Int</span><span class="Type">]</span> <span class="Statement">=&gt;</span> <span class="Type">Vector</span><span class="Type">[</span><span class="Type">Int</span><span class="Type">]</span>, times: <span class="Type">Int</span>) = {
+    <span class="Statement">val</span> <span class="Identifier">rts</span> = <span class="PreProc">new</span> <span class="Special">ArrayBuffer</span><span class="Type">[</span><span class="Type">Double</span><span class="Type">]</span>()
+    <span class="Statement">for</span> (time <span class="PreProc">&lt;-</span> <span class="Constant">0</span> until times) {
+      <span class="Statement">val</span> <span class="Identifier">st</span> = <span class="Special">System</span>.nanoTime()
+      mutator(numbers)
+      <span class="Statement">val</span> <span class="Identifier">et</span> = <span class="Special">System</span>.nanoTime() - st
+      rts.append(et)
+      println(name + <span class="Constant">&quot;,&quot;</span> + (et / <span class="Constant">1000000.0</span>) + <span class="Constant">&quot;,&quot;</span> + numbers.size)
+    }
+    println(name + <span class="Constant">&quot;,median = &quot;</span> + rts.sorted.apply(rts.length / <span class="Constant">2</span>) / <span class="Constant">1000000.0</span>)
+  }
+
+  <span class="Statement">def</span> <span class="Identifier">main</span>(args: <span class="Type">Array</span><span class="Type">[</span><span class="Type">String</span><span class="Type">]</span>): <span class="Type">Unit</span> = {
+    <span class="Statement">val</span> <span class="Identifier">numbers</span> = <span class="Special">Vector</span>.fill(<span class="Constant">1000000</span>)(<span class="Constant">0</span>)
+    runTest(
+      <span class="Constant">&quot;pure&quot;</span>,
+      numbers,
+      { numbers <span class="PreProc">=&gt;</span> mapByPure(numbers) { x <span class="PreProc">=&gt;</span> x + <span class="Constant">1</span> } },
+      <span class="Constant">20</span>)
+    runTest(
+      <span class="Constant">&quot;mutation&quot;</span>,
+      numbers,
+      { numbers <span class="PreProc">=&gt;</span> mapByImpure(numbers) { x <span class="PreProc">=&gt;</span> x + <span class="Constant">1</span> } },
+      <span class="Constant">20</span>)
+    runTest(
+      <span class="Constant">&quot;native&quot;</span>,
+      numbers,
+      { numbers <span class="PreProc">=&gt;</span> mapByNative(numbers) { x <span class="PreProc">=&gt;</span> x + <span class="Constant">1</span> } },
+      <span class="Constant">20</span>)
+  }
+
+
+}
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->
